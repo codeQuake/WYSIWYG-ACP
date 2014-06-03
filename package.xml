@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="de.codequake.wysiwyg.acp" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/package.xsd">
+	<packageinformation>
+		<packagename>ACP WYSIWYG</packagename>
+		<packagedescription><![CDATA[WYSIWYG Editor - ACP]]></packagedescription>
+		<isapplication>1</isapplication>
+		<version>1.0.0</version>
+		<date>2014-06-03</date>
+	</packageinformation>
+
+	<authorinformation>
+		<author><![CDATA[Jens Krumsieck]]></author>
+		<authorurl><![CDATA[http://codequake.de]]></authorurl>
+	</authorinformation>
+
+	<requiredpackages>
+		<requiredpackage minversion="2.0.6">com.woltlab.wcf</requiredpackage>
+	</requiredpackages>
+
+	<instructions type="install">
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+	</instructions>
+</package>
