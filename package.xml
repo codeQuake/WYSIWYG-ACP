@@ -3,7 +3,6 @@
 	<packageinformation>
 		<packagename>ACP WYSIWYG</packagename>
 		<packagedescription><![CDATA[WYSIWYG Editor - ACP]]></packagedescription>
-		<isapplication>1</isapplication>
 		<version>1.0.0</version>
 		<date>2014-06-03</date>
 	</packageinformation>
