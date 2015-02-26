@@ -3,8 +3,8 @@
 	<packageinformation>
 		<packagename>ACP WYSIWYG</packagename>
 		<packagedescription><![CDATA[WYSIWYG Editor - ACP]]></packagedescription>
-		<version>1.0.0</version>
-		<date>2014-06-03</date>
+		<version>1.1.0</version>
+		<date>2015-02-26</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -13,10 +13,14 @@
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="2.0.6">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.1.0 Alpha 1">com.woltlab.wcf</requiredpackage>
 	</requiredpackages>
 
 	<instructions type="install">
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="1.0.0">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 	</instructions>
 </package>
