@@ -1,5 +1,6 @@
 *.tar
 *.gz
+*.bat
 .settings/
 .project
 .buildpath
