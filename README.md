@@ -1,8 +1,8 @@
 WYSIWYG-ACP
 ===========
 
-This package provides all neccessary templates for wysiwyg usage in ACP. All templates are part of the WCF 2.0 frontend. They are just copied into the acp/templates-folder.
-This package is used by Fireball CMS 2.0
+This package provides all neccessary templates for wysiwyg usage in ACP. All templates are part of the WCF 2.1 frontend. They are just copied into the acp/templates-folder.
+This package is used by Fireball CMS 2.1
 
 Fireball CMS: https://github.com/codeQuake/Fireball
 

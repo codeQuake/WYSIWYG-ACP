@@ -1,4 +1,4 @@
-<fieldset id="settings" class="settingsContent tabMenuContent container containerPadding">
+<fieldset id="settings_{if $wysiwygSelector|isset}{$wysiwygSelector}{else}text{/if}" class="settingsContent tabMenuContent container containerPadding">
 	<dl class="wide">
 		{if $__wcf->getSession()->getPermission($permissionCanUseBBCodes)}
 			<dt></dt>
@@ -28,7 +28,7 @@
 				<small>{lang}wcf.message.settings.enableHtml.description{/lang}</small>
 			</dd>
 		{/if}
-		{if MODULE_USER_SIGNATURE && $showSignatureSetting && $__wcf->user->userID}
+		{if MODULE_USER_SIGNATURE && !$showSignatureSetting|empty && $__wcf->user->userID}
 			<dt></dt>
 			<dd>
 				<label><input id="showSignature" name="showSignature" type="checkbox" value="1"{if $showSignature} checked="checked"{/if} /> {lang}wcf.message.settings.showSignature{/lang}</label>
