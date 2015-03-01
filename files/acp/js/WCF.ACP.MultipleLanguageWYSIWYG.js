@@ -111,10 +111,10 @@ WCF.ACP.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 		this._languageID = $button.data('languageID');
 		if (this._values[this._languageID]) {
 			this._element.val(this._values[this._languageID]);
-			this._element.redactor('code.set', this._values[this._languageID]);
+			this._element.redactor('wutil.replaceText', this._values[this._languageID]);
 		} else {
 			this._element.val('');
-			this._element.redactor('code.set', '');
+			this._element.redactor('wutil.reset', '');
 		}
 		
 		// update marking
@@ -145,9 +145,9 @@ WCF.ACP.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 		
 	   // update element value
 		if (this._values[window.LANGUAGE_ID]) {
-			this._element.redactor('code.set', this._values[window.LANGUAGE_ID]);
+			this._element.redactor('wutil.replaceText', this._values[window.LANGUAGE_ID]);
 		} else {
-			this._element.redactor('code.set', '');
+			this._element.redactor('wutil.reset', '');
 		}
 		this._languageID = window.LANGUAGE_ID;
 		
