@@ -4,7 +4,7 @@
 		<packagename>ACP WYSIWYG</packagename>
 		<packagedescription><![CDATA[WYSIWYG Editor - ACP]]></packagedescription>
 		<version>1.1.0</version>
-		<date>2015-02-26</date>
+		<date>2015-03-01</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -18,9 +18,11 @@
 
 	<instructions type="install">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="file">files.tar</instruction>
 	</instructions>
 
 	<instructions type="update" fromversion="1.0.0">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="file">files.tar</instruction>
 	</instructions>
 </package>
