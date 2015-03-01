@@ -22,5 +22,6 @@
 
 	<instructions type="update" fromversion="1.0.0">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="file">files.tar</instruction>
 	</instructions>
 </package>
