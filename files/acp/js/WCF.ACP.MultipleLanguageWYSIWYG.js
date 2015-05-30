@@ -9,7 +9,7 @@
 
 if (!WCF) WCF = {};
 
-if (!WCF) WCF.ACP = {};
+if (!WCF.ACP) WCF.ACP = {};
 
 WCF.ACP.MultipleLanguageWYSIWYG = WCF.MultipleLanguageInput.extend({
 	/**
