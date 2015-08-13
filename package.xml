@@ -21,7 +21,7 @@
 		<instruction type="file">files.tar</instruction>
 	</instructions>
 
-	<instructions type="update" fromversion="1.1.1">
+	<instructions type="update" fromversion="1.1.0">
 		<instruction type="file">files.tar</instruction>
 	</instructions>
 </package>
