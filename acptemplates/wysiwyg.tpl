@@ -108,24 +108,21 @@ $(function() {
 	});
 	
 	head.load([
-		'{@$__wcf->getPath()}js/3rdParty/redactor/redactor{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor/redactor.js?v={@LAST_UPDATE_TIME}',
 		{if $__wcf->getLanguage()->getFixedLanguageCode() != 'en'}'{@$__wcf->getPath()}js/3rdParty/redactor/languages/{@$__wcf->getLanguage()->getFixedLanguageCode()}.js?v={@LAST_UPDATE_TIME}',{/if}
-		{if !ENABLE_DEBUG_MODE}
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wcombined.min.js?v={@LAST_UPDATE_TIME}'
-		{else}
-			{* official *}
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/table.js?v={@LAST_UPDATE_TIME}',
-			
-			{* WoltLab *}
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wbbcode.js?v={@LAST_UPDATE_TIME}',
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wbutton.js?v={@LAST_UPDATE_TIME}',
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontcolor.js?v={@LAST_UPDATE_TIME}',
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontfamily.js?v={@LAST_UPDATE_TIME}',
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontsize.js?v={@LAST_UPDATE_TIME}',
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wmonkeypatch.js?v={@LAST_UPDATE_TIME}',
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wutil.js?v={@LAST_UPDATE_TIME}',
-			'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wupload.js?v={@LAST_UPDATE_TIME}'
-		{/if}
+		
+		{* official *}
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/table.js?v={@LAST_UPDATE_TIME}',
+		
+		{* WoltLab *}
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wbbcode.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wbutton.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontcolor.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontfamily.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontsize.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wmonkeypatch.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wutil.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wupload.js?v={@LAST_UPDATE_TIME}'
 		{event name='javascriptFiles'}
 	], function() {
 		WCF.System.Dependency.Manager.invoke($callbackIdentifier);
