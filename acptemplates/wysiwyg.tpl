@@ -1,131 +1,67 @@
+<style>
+	woltlab-mention {
+		background-color: rgb(240, 248, 255);
+		border: 1px solid rgb(52, 152, 219);
+		display: inline-block;
+		margin: 0 3px;
+		padding: 0 2px;
+	}
+</style>
 <script data-relocate="true">
-var __REDACTOR_ICON_PATH = '{@$__wcf->getPath()}icon/';
-var __REDACTOR_BUTTONS = [ {implode from=$__wcf->getBBCodeHandler()->getButtonBBCodes() item=__bbcode}{ icon: '{$__bbcode->wysiwygIcon}', label: '{$__bbcode->buttonLabel|language}', name: '{$__bbcode->bbcodeTag}' }{/implode} ];
-var __REDACTOR_SMILIES = { {implode from=$__wcf->getSmileyCache()->getCategorySmilies() item=smiley}'{@$smiley->smileyCode|encodeJS}': '{@$smiley->getURL()|encodeJS}'{/implode} };
-var __REDACTOR_SOURCE_BBCODES = [ {implode from=$__wcf->getBBCodeHandler()->getSourceBBCodes() item=__bbcode}'{@$__bbcode->bbcodeTag}'{/implode} ];
-var __REDACTOR_CODE_HIGHLIGHTERS = { {implode from=$__wcf->getBBCodeHandler()->getHighlighters() item=__highlighter}'{@$__highlighter}': '{lang}wcf.bbcode.code.{@$__highlighter}.title{/lang}'{/implode} };
-</script>
-<script data-relocate="true">
-$(function() {
-	WCF.Language.addObject({
-		'wcf.attachment.dragAndDrop.dropHere': '{lang}wcf.attachment.dragAndDrop.dropHere{/lang}',
-		'wcf.attachment.dragAndDrop.dropNow': '{lang}wcf.attachment.dragAndDrop.dropNow{/lang}',
-		'wcf.bbcode.button.fontColor': '{lang}wcf.bbcode.button.fontColor{/lang}',
-		'wcf.bbcode.button.fontFamily': '{lang}wcf.bbcode.button.fontFamily{/lang}',
-		'wcf.bbcode.button.fontSize': '{lang}wcf.bbcode.button.fontSize{/lang}',
-		'wcf.bbcode.button.image': '{lang}wcf.bbcode.button.image{/lang}',
-		'wcf.bbcode.button.subscript': '{lang}wcf.bbcode.button.subscript{/lang}',
-		'wcf.bbcode.button.superscript': '{lang}wcf.bbcode.button.superscript{/lang}',
-		'wcf.bbcode.button.toggleBBCode': '{lang}wcf.bbcode.button.toggleBBCode{/lang}',
-		'wcf.bbcode.button.toggleHTML': '{lang}wcf.bbcode.button.toggleHTML{/lang}',
-		'wcf.bbcode.code': '{lang}wcf.bbcode.code{/lang}',
-		'wcf.bbcode.code.edit': '{lang}wcf.bbcode.code.edit{/lang}',
-		'wcf.bbcode.code.filename': '{lang}wcf.bbcode.code.filename{/lang}',
-		'wcf.bbcode.code.filename.description': '{lang}wcf.bbcode.code.filename.description{/lang}',
-		'wcf.bbcode.code.highlighter': '{lang}wcf.bbcode.code.highlighter{/lang}',
-		'wcf.bbcode.code.highlighter.description': '{lang}wcf.bbcode.code.highlighter.description{/lang}',
-		'wcf.bbcode.code.highlighter.none': '{lang}wcf.bbcode.code.highlighter.none{/lang}',
-		'wcf.bbcode.code.insert': '{lang}wcf.bbcode.code.insert{/lang}',
-		'wcf.bbcode.code.lineNumber': '{lang}wcf.bbcode.code.lineNumber{/lang}',
-		'wcf.bbcode.code.lineNumber.description': '{lang}wcf.bbcode.code.lineNumber.description{/lang}',
-		'wcf.bbcode.code.settings': '{lang}wcf.bbcode.code.settings{/lang}',
-		'wcf.bbcode.quote.edit': '{lang}wcf.bbcode.quote.edit{/lang}',
-		'wcf.bbcode.quote.edit.author': '{lang}wcf.bbcode.quote.edit.author{/lang}',
-		'wcf.bbcode.quote.edit.link': '{lang}wcf.bbcode.quote.edit.link{/lang}',
-		'wcf.bbcode.quote.insert': '{lang}wcf.bbcode.quote.insert{/lang}',
-		'wcf.bbcode.quote.title.clickToSet': '{lang}wcf.bbcode.quote.title.clickToSet{/lang}',
-		'wcf.bbcode.quote.title.javascript': '{lang}wcf.bbcode.quote.title.javascript{/lang}',
-		'wcf.global.noSelection': '{lang}wcf.global.noSelection{/lang}',
-		'wcf.message.autosave.prompt': '{lang}wcf.message.autosave.prompt{/lang}',
-		'wcf.message.autosave.prompt.confirm': '{lang}wcf.message.autosave.prompt.confirm{/lang}',
-		'wcf.message.autosave.prompt.discard': '{lang}wcf.message.autosave.prompt.discard{/lang}',
-		'wcf.message.autosave.restored': '{lang}wcf.message.autosave.restored{/lang}',
-		'wcf.message.autosave.restored.confirm': '{lang}wcf.message.autosave.restored.confirm{/lang}',
-		'wcf.message.autosave.restored.revert': '{lang}wcf.message.autosave.restored.revert{/lang}',
-		'wcf.message.autosave.restored.revert.confirmMessage': '{lang}wcf.message.autosave.restored.revert.confirmMessage{/lang}',
-		'wcf.message.autosave.restored.version': '{lang __literal=true}wcf.message.autosave.restored.version{/lang}',
-		'wcf.message.autosave.saved': '{lang}wcf.message.autosave.saved{/lang}'
-	});
+(function() {
+	var buttons = ['format', 'wcfSeparator', 'bold', 'italic', 'underline', 'deleted', 'wcfSeparator', 'lists', 'image', 'link'];
 	
-	var $editorName = '{if $wysiwygSelector|isset}{$wysiwygSelector|encodeJS}{else}text{/if}';
-	var $callbackIdentifier = 'Redactor_' + $editorName;
+	var elementId = '{if $wysiwygSelector|isset}{$wysiwygSelector|encodeJS}{else}text{/if}';
+	var callbackIdentifier = 'Redactor2_' + elementId;
 	
-	WCF.System.Dependency.Manager.setup($callbackIdentifier, function() {
-		var $textarea = $('#' + $editorName);
-		var $buttons = [ ];
+	WCF.System.Dependency.Manager.setup(callbackIdentifier, function() {
+		// TODO: Should the media stuff be here?
+		{include file='mediaJavaScript'}
 		
-		{include file='wysiwygToolbar'}
+		var element = elById(elementId);
+		var autosave = elData(element, 'autosave') || '';
+		if (autosave) {
+			element.removeAttribute('data-autosave');
+		}
 		
-		var $autosave = $textarea.data('autosave');
-		var $autosaveLastEditTime = ($autosave && $textarea.data('autosaveLastEditTime')) ? (parseInt($textarea.data('autosaveLastEditTime')) || 0) : 0;
-		var $autosavePrompt = ($autosave && $textarea.data('autosavePrompt')) ? true : false;
-		var $config = {
-			autosave: false,
-			buttons: $buttons,
-			convertImageLinks: false,
-			convertUrlLinks: false,
-			convertVideoLinks: false,
-			direction: '{lang}wcf.global.pageDirection{/lang}',
-			lang: '{@$__wcf->getLanguage()->getFixedLanguageCode()}',
-			maxHeight: 500,
+		var config = {
+			buttons: buttons,
 			minHeight: 200,
-			plugins: [ 'wutil', 'wmonkeypatch', 'table', 'wbutton', 'wbbcode', 'wfontcolor', 'wfontfamily', 'wfontsize', 'wupload' ],
-			removeEmpty: false,
-			replaceDivs: false,
-			source: true,
-			tabifier: false,
-			toolbarFixed: false,
+			plugins: ['WoltLabButton', 'WoltLabColor', 'WoltLabDropdown', 'WoltLabEvent', 'WoltLabLink', 'WoltLabQuote'],
 			woltlab: {
-				autosave: {
-					active: ($autosave) ? true : false,
-					key: ($autosave) ? '{@$__wcf->getAutosavePrefix()}_' + $autosave : '',
-					lastEditTime: $autosaveLastEditTime,
-					prefix: '{@$__wcf->getAutosavePrefix()}',
-					prompt: $autosavePrompt,
-					saveOnInit: {if !$errorField|empty}true{else}false{/if}
-				},
-				originalValue: $textarea.val()
+				autosave: autosave
 			}
 		};
 		
-		if ($.browser.iOS) {
-			// using a zero-width space breaks iOS' detection of the start of a sentence, causing the first word to be lowercased
-			$config.emptyHtml = '<p><br></p>';
+		// user mentions
+		if (elDataBool(element, 'support-mention')) {
+			config.plugins.push('WoltLabMention');
 		}
 		
-		{if MODULE_ATTACHMENT && !$attachmentHandler|empty && $attachmentHandler->canUpload()}
-			$config.plugins.push('wupload');
-			$config.woltlab.attachmentUrl = '{link controller='Attachment' id=987654321}{/link}';
-			$config.woltlab.attachmentThumbnailUrl = '{link controller='Attachment' id=987654321}thumbnail=1{/link}';
+		// media
+		{if $__wcf->session->getPermission('admin.content.cms.canUseMedia')}
+			config.plugins.push('WoltLabMedia');
 		{/if}
 		
-		{event name='javascriptInit'}
-		
-		// clear textarea before init
-		$textarea.val('');
-		
-		$textarea.redactor($config);
+		$(element).redactor(config);
 	});
-	
-	head.load([
-		'{@$__wcf->getPath()}js/3rdParty/redactor/redactor.js?v={@LAST_UPDATE_TIME}',
-		{if $__wcf->getLanguage()->getFixedLanguageCode() != 'en'}'{@$__wcf->getPath()}js/3rdParty/redactor/languages/{@$__wcf->getLanguage()->getFixedLanguageCode()}.js?v={@LAST_UPDATE_TIME}',{/if}
 		
-		{* official *}
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/table.js?v={@LAST_UPDATE_TIME}',
+	head.load([
+		'{@$__wcf->getPath()}js/3rdParty/redactor2/redactor.js?v={@LAST_UPDATE_TIME}',
 		
 		{* WoltLab *}
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wbbcode.js?v={@LAST_UPDATE_TIME}',
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wbutton.js?v={@LAST_UPDATE_TIME}',
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontcolor.js?v={@LAST_UPDATE_TIME}',
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontfamily.js?v={@LAST_UPDATE_TIME}',
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wfontsize.js?v={@LAST_UPDATE_TIME}',
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wmonkeypatch.js?v={@LAST_UPDATE_TIME}',
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wutil.js?v={@LAST_UPDATE_TIME}',
-		'{@$__wcf->getPath()}js/3rdParty/redactor/plugins/wupload.js?v={@LAST_UPDATE_TIME}'
-		{event name='javascriptFiles'}
-	], function() {
-		WCF.System.Dependency.Manager.invoke($callbackIdentifier);
-	});
-});
+		'{@$__wcf->getPath()}js/3rdParty/redactor2/plugins/WoltLabButton.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor2/plugins/WoltLabColor.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor2/plugins/WoltLabDropdown.js?v={@LAST_UPDATE_TIME}', 
+		'{@$__wcf->getPath()}js/3rdParty/redactor2/plugins/WoltLabEvent.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor2/plugins/WoltLabLink.js?v={@LAST_UPDATE_TIME}',
+		{if $__wcf->session->getPermission('admin.content.cms.canUseMedia')}'{@$__wcf->getPath()}js/3rdParty/redactor2/plugins/WoltLabMedia.js?v={@LAST_UPDATE_TIME}',{/if}
+		'{@$__wcf->getPath()}js/3rdParty/redactor2/plugins/WoltLabMention.js?v={@LAST_UPDATE_TIME}',
+		'{@$__wcf->getPath()}js/3rdParty/redactor2/plugins/WoltLabQuote.js?v={@LAST_UPDATE_TIME}'
+		
+		], function() {
+			WCF.System.Dependency.Manager.invoke(callbackIdentifier);
+		}
+	);
+})();
 </script>
