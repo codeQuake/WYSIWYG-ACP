@@ -7,9 +7,14 @@
 	{/foreach}
 {/capture}
 
-<div class="container containerPadding{if $__tabCount} messageTabMenu{/if}" data-preselect="true" data-collapsible="false" id="smilies-{if $wysiwygSelector|isset}{$wysiwygSelector}{else}text{/if}">
+<div class="messageTabMenuContent{if $__tabCount} messageTabMenu{/if}" data-preselect="true" data-collapsible="false" id="smilies-{if $wysiwygSelector|isset}{$wysiwygSelector}{else}text{/if}">
 	{capture assign=__defaultSmilies}
-		{include file='__messageFormSmilies' smilies=$__wcf->getSmileyCache()->getCategorySmilies()}
+		{assign var='__firstSmileyCategory' value=$smileyCategories|reset}
+		{if $__firstSmileyCategory->categoryID}
+			{include file='__messageFormSmilies' smilies=$__wcf->getSmileyCache()->getCategorySmilies($__firstSmileyCategory->categoryID)}
+		{else}
+			{include file='__messageFormSmilies' smilies=$__wcf->getSmileyCache()->getCategorySmilies()}
+		{/if}
 	{/capture}
 	
 	{if $__tabCount > 1}
@@ -20,11 +25,9 @@
 		</nav>
 		
 		{foreach from=$smileyCategories item=smileyCategory}
-			{if !$smileyCategory->isDisabled}
-				<div id="smilies-{if $wysiwygSelector|isset}{$wysiwygSelector|encodeJS}{else}text{/if}-{@$smileyCategory->categoryID}">
-					{if !$smileyCategory->categoryID}{@$__defaultSmilies}{/if}
-				</div>
-			{/if}
+			<div class="messageTabMenuContent" id="smilies-{if $wysiwygSelector|isset}{$wysiwygSelector|encodeJS}{else}text{/if}-{@$smileyCategory->categoryID}">
+				{if !$smileyCategory->categoryID}{@$__defaultSmilies}{/if}
+			</div>
 		{/foreach}
 		
 		<script data-relocate="true">
